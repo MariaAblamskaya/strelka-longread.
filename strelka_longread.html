@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стрелка. 200 лет закрытых дверей</title>
+<style>
+  :root{
+    --dark:#0d1b2a; --deeper:#081420; --volga:#2f6f9f; --oka:#3f7d5c;
+    --light:#f4efe6; --accent:#d9a441; --grey:#8fa3b0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:Georgia,'Times New Roman',serif;background:var(--dark);color:var(--light);line-height:1.75}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  .sans{font-family:'Helvetica Neue',Arial,sans-serif}
+
+  /* HEADER */
+  header{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
+    background:linear-gradient(160deg,#071320 0%,#0d1b2a 45%,#123047 75%,#1b4d5f 100%)}
+  .rivers{position:absolute;inset:0;pointer-events:none;opacity:.55}
+  .kicker{font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.35em;text-transform:uppercase;font-size:12px;color:var(--accent);margin-bottom:22px;position:relative}
+  h1{font-size:clamp(40px,8vw,84px);font-weight:400;line-height:1.05;position:relative}
+  h1 em{font-style:italic;color:var(--accent)}
+  .lead{max-width:560px;font-size:19px;color:#c9d6df;margin-top:26px;position:relative}
+  .scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-family:'Helvetica Neue',Arial,sans-serif;
+    letter-spacing:.3em;font-size:11px;color:var(--grey);text-transform:uppercase;animation:bob 2.2s infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* SECTIONS */
+  section{padding:70px 0}
+  .label{font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;font-size:11px;color:var(--accent);margin-bottom:10px}
+  h2{font-size:clamp(28px,4.5vw,42px);font-weight:400;margin-bottom:34px;line-height:1.2}
+  p{margin-bottom:22px;font-size:17.5px}
+  .hl{color:#c9d6df}
+  strong{color:#fff}
+
+  /* QUOTE */
+  blockquote{border-left:3px solid var(--accent);padding:8px 0 8px 26px;margin:40px 0;font-size:21px;font-style:italic;color:#e8ddc7}
+  cite{display:block;margin-top:14px;font-style:normal;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--grey);letter-spacing:.05em}
+
+  /* TIMELINE */
+  .tl-note{font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--grey);margin-bottom:26px}
+  .tl-item{border-top:1px solid rgba(255,255,255,.12)}
+  .tl-item:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+  .tl-year{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:20px 4px;cursor:pointer;user-select:none;transition:background .2s}
+  .tl-year:hover{background:rgba(255,255,255,.04)}
+  .tl-year .yr{font-size:clamp(20px,3.4vw,30px);color:var(--accent);min-width:110px;font-variant-numeric:tabular-nums}
+  .tl-year .t{font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;color:#dbe6ee;flex:1}
+  .tl-year .plus{color:var(--grey);font-size:22px;transition:transform .25s}
+  .tl-body{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 4px}
+  .tl-body p{font-size:16.5px;color:#c9d6df;padding-bottom:22px}
+  .tl-item.open .tl-body{max-height:500px}
+  .tl-item.open .plus{transform:rotate(45deg)}
+
+  /* CHARACTERS */
+  .cards{display:grid;gap:14px}
+  .card{border:1px solid rgba(255,255,255,.15);padding:22px 24px;cursor:pointer;transition:border-color .2s,background .2s}
+  .card:hover{border-color:var(--accent);background:rgba(255,255,255,.03)}
+  .card h3{font-size:20px;font-weight:400;display:flex;align-items:center;gap:10px}
+  .card .sub{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.12em;margin-top:4px}
+  .card .body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .card.open .body{max-height:420px}
+  .card .body p{padding-top:16px;margin-bottom:0;font-size:16.5px;color:#c9d6df}
+
+  /* SYMBOLS */
+  .sym{margin-bottom:34px;padding-left:26px;border-left:2px solid rgba(255,255,255,.15)}
+  .sym h3{font-size:21px;font-weight:400;margin-bottom:8px}
+  .sym p{font-size:16.5px;color:#c9d6df;margin-bottom:0}
+
+  /* POLL */
+  .poll-box{border:1px solid rgba(255,255,255,.18);padding:28px 26px;margin-top:10px}
+  .opt{display:block;width:100%;text-align:left;background:none;border:1px solid rgba(255,255,255,.2);color:var(--light);
+    font-family:Georgia,serif;font-size:17px;padding:15px 18px;margin-bottom:10px;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s}
+  .opt:hover{border-color:var(--accent)}
+  .opt .fill{position:absolute;inset:0;background:rgba(217,164,65,.16);width:0%;transition:width .6s ease}
+  .opt span{position:relative;z-index:1}
+  .opt .pct{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:var(--accent);opacity:0;transition:opacity .3s;z-index:1}
+  .poll-box.voted .pct{opacity:1}
+  .poll-msg{font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--grey);margin-top:12px}
+
+  /* DEEPER (источники) */
+  .src{display:grid;gap:12px;margin-top:8px}
+  .src a{display:block;border:1px solid rgba(255,255,255,.15);padding:18px 20px;text-decoration:none;color:var(--light);transition:border-color .2s,background .2s}
+  .src a:hover{border-color:var(--accent);background:rgba(255,255,255,.03)}
+  .src .st{color:var(--accent);font-size:17px}
+  .src .sd{font-family:'Helvetica Neue',Arial,sans-serif;font-size:13.5px;color:var(--grey);margin-top:4px;line-height:1.5}
+
+  footer{padding:46px 0 60px;border-top:1px solid rgba(255,255,255,.12);font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--grey);text-align:center}
+  footer .t{color:#dbe6ee;font-size:15px;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="rivers" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <path d="M-50,650 C300,620 500,500 640,470 C760,445 850,470 1250,520" stroke="#2f6f9f" stroke-width="90" fill="none" opacity=".5"/>
+    <path d="M-50,760 C250,720 450,640 640,470 C790,340 950,260 1250,220" stroke="#3f7d5c" stroke-width="70" fill="none" opacity=".45"/>
+    <circle cx="640" cy="470" r="10" fill="#d9a441" opacity=".9"/>
+  </svg>
+  <div class="wrap">
+    <div class="kicker">Мультимедийный лонгрид · Нижний Новгород</div>
+    <h1>Стрелка.<br><em>200 лет закрытых дверей</em></h1>
+    <p class="lead">Самое заметное место города — мыс на слиянии Волги и Оки — почти весь XX век было закрыто для нижегородцев. Как самая охраняемая точка города снова стала общественной?</p>
+  </div>
+  <div class="scroll-hint">↓ Листайте</div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <p>Есть в Нижнем Новгороде точка, с которой город начинался и которой город всегда гордился, но которая веками принадлежала не городу. Стрелка — треугольник суши там, где Ока вливается в Волгу. Туда нельзя было просто прийти погулять: сначала — ярмарочные пристани, потом режимный грузовой порт, бункеры холодной войны и забор чемпионата мира. Охрану снимали только к 800-летию города.</p>
+  <p>Эта история — не про стройку. Она про то, <strong>кто владеет городским берегом</strong>, и про людей, которые вернули его городу: архитекторы, градозащитники, портовики и тысячи нижегородцев, голосовавших за каждую скамейку.</p>
+  <blockquote>«Порт был закрытым режимным предприятием, но запомнился многим жителям силуэтами кранов на фоне водной глади и неба»<cite>— проект «История Стрелки», strelkahistory.tilda.ws</cite></blockquote>
+</section>
+
+<section>
+  <div class="label">Хронология · интерактив</div>
+  <h2>Коснитесь года — раскроется эпизод</h2>
+  <p class="tl-note">Хронология проверена по открытым источникам (полный список — в конце материала)</p>
+  <div id="timeline"></div>
+</section>
+
+<section>
+  <div class="label">Персонажи эпохи</div>
+  <h2>Кто держал Стрелку</h2>
+  <p class="hl">Четыре судьбы одной точки на карте. Нажмите на карточку.</p>
+  <div class="cards" id="chars"></div>
+  <blockquote style="margin-top:46px">«Снос пакгаузов — невосполнимая потеря для города. У новых зданий нет истории, они не интересны ни гостям, ни жителям»<cite>— архитектор Зоя Рюрикова, «Коммерсантъ Нижний Новгород», 2017</cite></blockquote>
+</section>
+
+<section>
+  <div class="label">Место силы</div>
+  <h2>Символы, которые пережили всё</h2>
+  <div class="sym"><h3>🏗 Пакгаузы 1896 года</h3><p>Ажурные металлические каркасы, скрытые кирпичной обшивкой почти на век. Спасены в 2017-м, к 2020-му очищены до первоначального цвета. Сегодня — концертный зал и выставочное пространство.</p></div>
+  <div class="sym"><h3>⛪ Собор Александра Невского</h3><p>Пережил план сноса под памятник-маяк Ленину, пожар 1940 года, склад рыбы и обувной фабрики — и восстановлен к 2006-му «почти с нуля, по фотографиям».</p></div>
+  <div class="sym"><h3>💾 Бункер холодной войны</h3><p>Найден в декабре 2016-го; активисты предлагали сделать из него музей Холодной войны. Осенью 2017-го сгорел — «гореть там, собственно, было нечему» (archi.ru).</p></div>
+  <div class="sym"><h3>🗼 Реплики Шуховской башни</h3><p>Две уменьшенные копии башни инженера Шухова — отсылка к оригиналу на Оке под Дзержинском.</p></div>
+</section>
+
+<section>
+  <div class="label">Мнение читателей</div>
+  <h2>Что бы вы поставили на Стрелке?</h2>
+  <p class="hl">Читатели «Нижегородской правды» когда-то голосовали за ладью, памятник кораблю, Шуховскую башню и маяк. Проголосуйте — и увидите, как расходятся мнения.</p>
+  <div class="poll-box" id="poll">
+    <button class="opt" data-o="Маяк-смотровая площадка"><div class="fill"></div><span>🗼 Маяк-смотровая площадка</span><div class="pct"></div></button>
+    <button class="opt" data-o="Филармония по проекту Чобана"><div class="fill"></div><span>🎻 Филармония по проекту Чобана</span><div class="pct"></div></button>
+    <button class="opt" data-o="Музей порта и бункеров"><div class="fill"></div><span>🚢 Музей порта и бункеров</span><div class="pct"></div></button>
+    <button class="opt" data-o="Оставить свободным пространством"><div class="fill"></div><span>🌿 Оставить свободным пространством</span><div class="pct"></div></button>
+    <div class="poll-msg" id="pollMsg">Финал лонгрида — ваш голос</div>
+  </div>
+</section>
+
+<section>
+  <div class="label">Копнуть глубже</div>
+  <h2>Где читать дальше</h2>
+  <p class="hl">Проверенные источники — от краеведческого проекта с архивными фото до хроники битвы за пакгаузы.</p>
+  <div class="src">
+    <a href="https://strelkahistory.tilda.ws/" target="_blank" rel="noopener">
+      <span class="st">«История Стрелки» — краеведческий проект</span>
+      <div class="sd">Вся хронология места в одном сайте: от Стрелицы XVI века до надписи 1967 года, с архивными снимками и разбором пакгаузов выставок 1882 и 1896 годов.</div>
+    </a>
+    <a href="https://irgsno.ru/strelka/issledovanie" target="_blank" rel="noopener">
+      <span class="st">Исследование ИРГСНО: «Стрелка»</span>
+      <div class="sd">Как закрытую промзону превращали в общественное пространство: концепция «Среда 800», состояние территории до благоустройства и возвращение портового крана в 2024-м.</div>
+    </a>
+    <a href="https://www.nn.ru/text/gorod/2025/01/25/75029612/" target="_blank" rel="noopener">
+      <span class="st">НН.ру: архивная Стрелка в фотографиях</span>
+      <div class="sd">Какой была Стрелка в XX веке — фотолонгрид: собор с зенитным пулемётом, краны, пустыри 1990-х и подготовка к чемпионату мира.</div>
+    </a>
+    <a href="https://archi.ru/press/world/75011/glavnyi-arkhitektor-nizhnego-novgoroda-o-snose-betonnykh-pakgauzov-na-strelke-my-ne-imeem-prava-ikh-poteryat" target="_blank" rel="noopener">
+      <span class="st">Archi.ru: «Мы не имеем права их потерять»</span>
+      <div class="sd">Хроника августа 2017 года: главный архитектор города о сносе бетонных пакгаузов и судьбе ажурных конструкций XIX века.</div>
+    </a>
+    <a href="https://nn.rbc.ru/nn/02/08/2017/5982081c9a794796f8aa3736" target="_blank" rel="noopener">
+      <span class="st">РБК Нижний Новгород: «Гнилые зубы» пакгаузов</span>
+      <div class="sd">Дискуссия о ценности конструктивизма: экспертиза аварийности, позиция градозащитников и опрос, где горожане разделились почти пополам.</div>
+    </a>
+    <a href="https://pravda-nn.ru/long/10-faktov-o-strelke-meste-gde-vstrechayutsya-proshloe-nastoyashhee-i-budushhee-nizhnego-novgoroda/" target="_blank" rel="noopener">
+      <span class="st">«Нижегородская правда»: 10 фактов о Стрелке</span>
+      <div class="sd">Сибирские и Петербургские пристани, дубовый плот под фундаментом собора, фильтровальная станция, спасшая город от холеры.</div>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="t">Стрелка. 200 лет закрытых дверей</div>
+  Мультимедийный лонгрид · собран по открытым источникам · готов к переносу на Tilda
+</footer>
+
+<script>
+const timeline=[
+ ["XVI век","Стрелица — центр Стрелицкого стана","Низкий берег оказывается удобнее высокого холма для погрузки судов: здесь появляются первые пристани."],
+ ["1817","Перенос ярмарки","После пожара 1816 года Макарьевскую ярмарку переносят в Нижний. Инженер Августин Бетанкур выбирает левый низкий берег — «товары трудно поднимать на гору». Ярмарку ставят на насыпь, вокруг роют полуторакилометровый канал. Главный архитектор — Огюст Монферран."],
+ ["1822","Открытие ярмарочного комплекса","15 июля торжественно открывается новый ярмарочный комплекс. Ярмарка открывалась в один и тот же день почти сто лет — до 25 августа «спуском флагов»."],
+ ["1881","Освящение собора","После 13 лет строительства освящают Александро-Невский (Новоярмарочный) собор по проекту Льва Даля. На освящении — Александр III с семьёй."],
+ ["1896","Всероссийская выставка","XVI Всероссийская промышленно-художественная выставка — впервые не в столице. Каркас главного павильона весом 1840 тонн демонтируют с Ходынского поля в Москве и привозят по Волге. На выставке запускают первый в городе трамвай."],
+ ["1909","Фильтровальная станция","Ярмарочная фильтровальная станция в стиле модерн. По данным краеведов, именно она спасла город от эпидемии холеры."],
+ ["1932","Грузовой порт","На месте угасшей ярмарки строится большой грузовой порт. Собор уже разобран до шатров: его хотели превратить в памятник-маяк Ленину высотой 83 метра с горящей рукой «в направлении течения Волги». Не успели — здание стало складом и жильём портовиков."],
+ ["1941–1945","Война на крыше собора","На крыше собора — зенитный пулемёт. По данным источников, оборона Стрелки не позволила люфтваффе сбросить бомбы на порт и Окский мост."],
+ ["1967","Надпись на причальной стенке","На причальной стенке выкладывают надпись «Стрелка» — она сохраняется до сих пор."],
+ ["1960–80-е","Бункеры холодной войны","Холодная война: на территории порта строят сеть подземных противоядерных бункеров. О них город не догадывается до декабря 2016 года."],
+ ["1990-е","Пустырь","Порт приватизирован. Вокруг — стихийные гаражи, мусор, ржавеющие краны «Ганц». Стрелка — закрытый пустырь в центре города."],
+ ["2015–2017","Подготовка к ЧМ-2018","Подготовка к ЧМ-2018: стадион, зачистка территории. Под обшивкой двух «неприметных складов» архитектор Денис Плеханов опознаёт металлическое кружево — фрагменты павильонов выставок 1882 и 1896 годов. Пакгаузы 1930-х снести не успевают остановить — их демонтируют в августе 2017-го."],
+ ["2016","Банкротство и краны","Порт признают банкротом. Один за другим сносят портовые краны — последним в декабре уходит «Ганц». Нижегородцы пишут: «ушла история». Тогда же обнаруживают бункеры."],
+ ["2019","Intervals","Фестиваль аудиовизуального искусства Intervals впервые «зажигает» пакгаузы — тысячи людей впервые видят этот свет на Стрелке."],
+ ["2021","Возвращение городу","К 800-летию города, по программе «Среда 800», Стрелку открывают: амфитеатр на самом мысе, смотровые площадки, баржа-скейтпарк, реплики Шуховской башни. Благоустройство — 197,5 млн рублей, реставрация фильтровальной станции — ещё 39 млн из федерального бюджета."],
+ ["2022→","Открытый вопрос","Стрелка — любимая точка города и строящаяся арена ледового дворца. Вопрос «кто владеет берегом» снова открыт: концепция Сергея Чобана предполагает филармонию и культурный центр, а сам ландшафт пока «временный»."]
+];
+const chars=[
+ ["⚓","Инженер Бетанкур","испанец на русской службе","Испанец на русской службе, глава комитета строений. Именно он в 1817-м выбрал низкий левый берег вместо нагорного — и придумал первую канализацию современного типа в Европе, без которой 200–300 тысяч ярмарочных гостей не выжили бы в одну реку."],
+ ["📷","Максим Дмитриев","фотограф","Нижегородский фотограф конца XIX века, оставивший главную визуальную летопись ярмарки: наводнения «как в Венеции», пароходы, купеческая суета. Его снимки — база любого «было/стало»."],
+ ["🏗","Градозащитники","Марина Игнатушко и «Открытая Стрелка»","Архитектурный критик Марина Игнатушко и движение «Открытая Стрелка». Именно их экспертиза и общественный шум в 2017 году спасли два пакгауза 1896 года — сегодня это концертная площадка и главный культурный кейс города."],
+ ["🚢","Портовик","безымянный герой истории","Безымянный герой этой истории: три поколения людей, для которых Стрелка была работой, а не парком. Их силуэты на фоне кранов — та самая живая часть этой истории, которую помнит старший Нижний."]
+];
+document.getElementById('timeline').innerHTML=timeline.map(t=>
+ `<div class="tl-item"><div class="tl-year"><span class="yr">${t[0]}</span><span class="t">${t[1]}</span><span class="plus">+</span></div><div class="tl-body"><p>${t[2]}</p></div></div>`).join('');
+document.querySelectorAll('.tl-year').forEach(el=>el.addEventListener('click',()=>el.parentElement.classList.toggle('open')));
+document.getElementById('chars').innerHTML=chars.map(c=>
+ `<div class="card"><h3>${c[0]} ${c[1]}</h3><div class="sub">${c[2]}</div><div class="body"><p>${c[3]}</p></div></div>`).join('');
+document.querySelectorAll('.card').forEach(el=>el.addEventListener('click',()=>el.classList.toggle('open')));
+const poll=document.getElementById('poll'),msg=document.getElementById('pollMsg'),opts=[...document.querySelectorAll('.opt')];
+let voted=false;
+opts.forEach(b=>b.addEventListener('click',()=>{
+  if(voted)return; voted=true;
+  b.querySelector('.fill').style.width='100%'; b.classList.add('chosen');
+  poll.classList.add('voted'); msg.textContent='Спасибо за голос! Это демо-опрос — при переносе на Tilda к нему подключается живая статистика.';
+}));
+</script>
+</body>
+</html>
